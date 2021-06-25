@@ -95,24 +95,40 @@ function getSystemInfo() {
       navigator.userAgent.indexOf("IEMobile") !== -1;
    return agent;
 }
-function getParameterByName(url,name) {
+function getParameterByName(url, name) {
    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-       results = regex.exec(url);
-   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+      results = regex.exec(url);
+   return results === null
+      ? ""
+      : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-function getTrackingLink(){
-   var scripts = document.getElementById("tm-tracking-script");
-   return decodeURIComponent(getParameterByName(scripts.src,"tracking"));
+function getTrackingLink() {
+   var scripts = document.getElementsByTagName("script");
+   var len = scripts.length;
+   var absoluteAddr = "";
+   for (var i = 0; i < len; i++) {
+      if (
+         scripts[i].src.search("https://cdn.jsdelivr.net/gh/sparrowit19/redtrack") > 0 &&
+         scripts[i].src.lastIndexOf("/") >= 0
+      ) {
+         absoluteAddr = scripts[i].src;
+         break;
+      }
+   }
+   //console.log(absoluteAddr);
+   return decodeURIComponent(getParameterByName(scripts.src, "tracking"));
 }
-function getUrl(){
+function getUrl() {
    var _document = null;
-   try{
+   try {
       _document = window.top.document;
-   }catch(error){
+   } catch (error) {
       _document = document;
    }
-   return _document.location.href ? encodeURIComponent(_document.location.href) : "";
+   return _document.location.href
+      ? encodeURIComponent(_document.location.href)
+      : "";
 }
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
