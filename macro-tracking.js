@@ -110,14 +110,14 @@ function getTrackingLink() {
    console.log(scripts);
    for (var i = 0; i < len; i++) {
       if (
-         scripts[i].src.search("https://cdn.jsdelivr.net/gh/sparrowit19/redtrack") > -1
+         scripts[i].src.search("https://cdn.jsdelivr.net/gh/sparrowit19/redtrack") > 0
       ) {
          absoluteAddr = scripts[i].src;
          break;
       }
    }
    //console.log(absoluteAddr);
-   return decodeURIComponent(getParameterByName(scripts.src, "tracking"));
+   return decodeURIComponent(getParameterByName(absoluteAddr, "tracking"));
 }
 function getUrl() {
    var _document = null;
