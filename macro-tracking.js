@@ -107,10 +107,10 @@ function getTrackingLink() {
    var scripts = document.getElementsByTagName("script");
    var len = scripts.length;
    var absoluteAddr = "";
-   console.log(scripts);
+   
    for (var i = 0; i < len; i++) {
       if (
-         scripts[i].src.search("https://cdn.jsdelivr.net/gh/sparrowit19/redtrack") > 0
+         scripts[i].src.indexOf("https://cdn.jsdelivr.net/gh/sparrowit19/redtrack") > -1
       ) {
          absoluteAddr = scripts[i].src;
          break;
