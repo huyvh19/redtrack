@@ -112,7 +112,7 @@ function getUrl(){
    }catch(error){
       _document = document;
    }
-   return _document.location.href ? _document.location.href : "";
+   return _document.location.href ? encodeURIComponent(_document.location.href) : "";
 }
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
@@ -124,9 +124,10 @@ xhttp.onreadystatechange = function () {
       tracking = replaceMacro(tracking, "__IP__", data.ip);
       tracking = replaceMacro(tracking, "__LOC__", getUrl());
       tracking = replaceMacro(tracking, "__OS__", agent.browser.os);
+      tracking = replaceMacro(tracking, "__TIMESTAMP__", new Date().getTime());
       //console.log(data);
       //console.log(agent);
-      //console.log(tracking);
+      console.log(tracking);
       var img = document.createElement("img");
       img.src = tracking;
    }
